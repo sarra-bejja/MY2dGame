@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 public class GamePannel extends JPanel implements Runnable{
@@ -25,8 +26,7 @@ public class GamePannel extends JPanel implements Runnable{
     //world settings
     public final int maxWorldCol=50;
     public final int maxWorldRow=50;
-    public final int worldWidth=tileSize*maxWorldCol;
-    public final int worldHeight=tileSize*maxWorldRow;
+
 
     
 
@@ -35,14 +35,18 @@ public class GamePannel extends JPanel implements Runnable{
     
     //FPS
     int FPS=60;
-    
+    //system
     TileManager tileM=new TileManager(this);
     KeyHandler keyH=new KeyHandler();
-    Thread gameThread;
-    
+    Sound sound=new Sound();
     public CollisionChecker cChecker=new CollisionChecker(this);
+    public AssetSetter aSetter =new AssetSetter(this);
+    Thread gameThread;
+
     
+    //entity and object
     public Player player=new Player(this,keyH);
+    public SuperObject obj []= new SuperObject[10];
     
 
     
@@ -54,6 +58,11 @@ public class GamePannel extends JPanel implements Runnable{
 		this.setFocusable(true);
 		
     	
+    }
+    
+    public void setupGame() {
+    	aSetter.setObject();
+    	PlayMusic(0);
     }
     
     public void startGameThread() {
@@ -95,13 +104,43 @@ public class GamePannel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2=(Graphics2D)g;
-		
+		//tile
 		tileM.draw(g2);
 		player.draw(g2);
 		
+		//object
+		for(int i=0;i<obj.length;i++) {
+			if(obj[i] !=null) {
+				obj[i].draw(g2, this);
+			}
+		}
+		
+		
+		//player
 		g2.dispose();
 		
 		
 	}
+	
+	public void PlayMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+		
+	}
+	public void stopMusic() {
+		sound.stop();
+		
+	}
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
+		
+	}
     
 }
+
+
+
+
+

@@ -19,6 +19,7 @@ public class main {
         window.setLocationRelativeTo(null);//bch l window tji f center par defaut
         window.setVisible(true);//so we can see it
         
+        gamePannel.setupGame();
         gamePannel.startGameThread();
         
 	}
