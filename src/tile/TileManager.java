@@ -17,7 +17,7 @@ public class TileManager {
 	
 	public TileManager(GamePannel gp) {
 		this.gp=gp;
-		tile=new Tile[10];
+		tile=new Tile[11];
 		mapTileNum=new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
@@ -59,6 +59,18 @@ public class TileManager {
 			
 			tile[5]=new Tile();
 			tile[5].image=ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
+			
+			tile[8]=new Tile();
+			tile[8].image=ImageIO.read(getClass().getResourceAsStream("/tiles/castle1.png"));
+			tile[8].collision=true;
+			
+			tile[9]=new Tile();
+			tile[9].image=ImageIO.read(getClass().getResourceAsStream("/tiles/castle2.png"));
+			tile[9].collision=true;
+			
+			tile[10]=new Tile();
+			tile[10].image=ImageIO.read(getClass().getResourceAsStream("/tiles/castle3.png"));
+			tile[10].collision=true;
 			
 		}catch(IOException e) {
 			e.printStackTrace();
