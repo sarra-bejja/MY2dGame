@@ -38,8 +38,8 @@ public class GamePannel extends JPanel implements Runnable{
     //system
     TileManager tileM=new TileManager(this);
     KeyHandler keyH=new KeyHandler();
-    Sound music=new Sound();
-    Sound se=new Sound();
+    public Sound music=new Sound();
+    public Sound se=new Sound();
     public CollisionChecker cChecker=new CollisionChecker(this);
     public AssetSetter aSetter =new AssetSetter(this);
     public UI ui=new UI(this);
@@ -54,7 +54,7 @@ public class GamePannel extends JPanel implements Runnable{
     
     public GamePannel() {
     	this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-    	this.setBackground(Color.pink);
+    	this.setBackground(Color.PINK);
     	this.setDoubleBuffered(true);//for better performance
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
@@ -140,8 +140,9 @@ public class GamePannel extends JPanel implements Runnable{
 		
 	}
 	public void stopMusic() {
-		music.stop();
-		
+		if (music.clip != null) {
+			music.stop();
+		}
 	}
 	public void playSE(int i) {
 		se.setFile(i);
