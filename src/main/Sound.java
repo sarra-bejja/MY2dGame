@@ -1,6 +1,7 @@
 package main;
 
 
+
 	import java.net.URL;
 
 	import javax.sound.sampled.AudioInputStream;
@@ -22,31 +23,27 @@ package main;
 
 
 		}
-
-		
-			public boolean setFile(int i) {
-				try {
-					AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-					clip = AudioSystem.getClip();
-					clip.open(ais);
-					return true; // Return true if successful
-				} catch (Exception e) {
-					return false; // Return false if an exception occurs
-				}
+		public void setFile(int i) {
+			try {
+				AudioInputStream ais=AudioSystem.getAudioInputStream(soundURL[i]);
+				clip=AudioSystem.getClip();
+				clip.open(ais);
+				
+			}catch(Exception e) {
+				
 			}
 			
-			public void play() {
-				if (setFile(0)) { // Assuming 0 is a valid index for your soundURL array
-					clip.start();
-				} else {
-					System.out.println("Failed to set file. Cannot play.");
-				}
+		}
+		public void play() {
+			if (clip != null) {
+				clip.start();
+			} else {
+				System.out.println("No file set. Call setFile() before playing.");
 			}
 			
-		
+		}
 		public void loop() {
 			if (clip != null) {
-				System.out.println("Calling loop method");
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
 		}
@@ -56,8 +53,4 @@ package main;
 			clip = null; // Set clip to null after stopping
 			
 		}
-		
-		
 	}
-
-

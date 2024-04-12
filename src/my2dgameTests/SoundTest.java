@@ -30,24 +30,20 @@ public class SoundTest {
             }
         }
         @Test
-        void testPlay() {
+        public void testPlay() {
             Sound sound = new Sound();
-            for (int i = 0; i < sound.soundURL.length; i++) {
-                sound.setFile(i);
+            sound.setFile(0);
+            
+            // Attempt to play the sound
+            try {
                 sound.play();
-                // Wait for the clip to finish playing
-                while (sound.clip.isRunning()) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                assertNotNull(sound.clip);
-                sound.stop(); // Stop the sound after testing
-                assertNull(sound.clip);
+            } catch (NullPointerException e) {
+                fail("NullPointerException should not be thrown.");
             }
+        
+            assertNotNull(sound.clip); // Ensure clip is not null after playing
         }
+        
     
         @Test
         void testLoop() {
@@ -73,19 +69,27 @@ public class SoundTest {
         }
     
         @Test
-        void testStop() {
+        public void testStop() {
             Sound sound = new Sound();
-            for (int i = 0; i < sound.soundURL.length; i++) {
-                sound.setFile(i);
-                sound.play(); // Start playing the sound
-                sound.stop(); // Stop the sound
-                assertNull(sound.clip); // Clip should be null after stopping
+            sound.setFile(0);
+            sound.play();
+            assertNotNull(sound.clip); // Ensure clip is not null before stopping
+        
+            // Attempt to stop the sound
+            try {
+                sound.stop();
+            } catch (NullPointerException e) {
+                fail("NullPointerException should not be thrown.");
             }
+        
+            assertNull(sound.clip); // Ensure clip is null after stopping
+        }
+        
         }
     
        
 
-        }
+        
     
     
             

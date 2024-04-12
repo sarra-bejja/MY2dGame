@@ -138,12 +138,3 @@ public class CollisionChecker {
 	}
 
 }
-
-
-
-
-
-
-
-
-

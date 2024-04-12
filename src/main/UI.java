@@ -11,7 +11,7 @@ import object.OBJkey;
 public class UI {
 	GamePannel gp;
 	Font arial_40,arial_80B;
-	BufferedImage keyImage;
+	public BufferedImage keyImage;
 	public boolean messageON=false;
 	public String message="";
 	int messageCounter=0;
