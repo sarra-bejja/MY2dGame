@@ -53,7 +53,7 @@ public class TileManagerMocking {
         // Mock the behavior of draw method
         doAnswer(invocation -> {
             Graphics2D g2 = (Graphics2D) invocation.getArguments()[0];
-            // Your custom logic here...
+        
             return null;
         }).when(tileManager).draw(any(Graphics2D.class));
     
